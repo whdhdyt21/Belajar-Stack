@@ -1,4 +1,4 @@
-//Double Linked List
+//Stack Ban (id Ban dan Merk Ban)
 #include <iostream>
 #define BMAXX 10
 using namespace std;

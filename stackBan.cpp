@@ -14,7 +14,7 @@ struct Stack
     private :
         int count;
     public :
-            Ban* item;
+        Ban* item;
 
             Stack()
             {
@@ -22,19 +22,19 @@ struct Stack
                 item = new Ban[BMAXX];
             }
 
-            bool penuh()
+            bool full()
             {
                 return (count == BMAXX);
             }
 
-            bool kosong()
+            bool empty()
             {
                 return (count == -1);
             }
 
             void push(Ban val)
             {
-                if (!penuh())
+                if (!full())
                 {
                     count++;
                     item[count] = val;
@@ -47,7 +47,7 @@ struct Stack
 
             void pop()
             {
-                if (!kosong())
+                if (!empty())
                 {
                     count--;
                 }
@@ -59,7 +59,7 @@ struct Stack
 
             void top()
             {
-                if (!kosong())
+                if (!empty())
                 {
                     cout << "ID Ban : " << item[count].idBan << endl;
                     cout << "Merk Ban : " << item[count].merkBan << endl;
@@ -72,7 +72,7 @@ struct Stack
 
             void print()
             {
-                if (!kosong())
+                if (!empty())
                 {
                     for (int i = count; i >= 0; i--)
                     {
@@ -85,45 +85,78 @@ struct Stack
                     cout << "Stack Kosong" << endl;
                 }
             }
+
+            void length()
+            {
+                cout << "Jumlah Tumpukan Ban : ";
+                if (!empty())
+                {
+                    cout << count + 1 << endl;
+                }
+                else
+                {
+                    cout << 0 << endl;
+                }
+            }
+
+            ~Stack()
+            {
+                delete[] item;
+            }
 };
 
+Stack stackBan;
 
+void menu()
+{
+    int pilihan;
+    Ban ban;
+    do
+    {
+        cout << "\n----------- Menu Stack Ban -----------" << endl;
+        cout << "--------------------------------------" << endl;
+        cout << "1. Push    (Menambah data baru)" << endl;
+        cout << "2. Pop     (Menghapus data terakhir)" << endl;
+        cout << "3. Top     (Menampilkan data terakhir)" << endl;
+        cout << "4. Print   (Menampilkan semua data)" << endl;
+        cout << "5. Length  (Menampilkan jumlah data)" << endl;
+        cout << "6. Exit    (Keluar dari menu)" << endl;
+        cout << "Pilihan : ";
+        cin >> pilihan;
+        cout << "--------------------------------------" << endl;
+        switch (pilihan)
+        {
+        case 1:
+            cout << "ID Ban : ";
+            cin >> ban.idBan;
+            cout << "Merk Ban : ";
+            cin >> ban.merkBan;
+            stackBan.push(ban);
+            break;
+        case 2:
+            stackBan.pop();
+            break;
+        case 3:
+            stackBan.top();
+            break;
+        case 4:
+            stackBan.print();
+            break;
+        case 5:
+            stackBan.length();
+            break;
+        case 6:
+            cout << "Terima Kasih :)" << endl;
+            break;
+        default:
+            cout << "Pilihan Tidak Ada :(" << endl;
+            break;
+        }
+    } while (pilihan != 6);
+}
 
 int main(int argc, char const *argv[])
 {
-    Stack* stackBan = new Stack();
-
-    Ban* ban1 = new Ban();
-
-    ban1->idBan = 1;
-    ban1->merkBan = "Dunlop";
-
-    stackBan->push(*ban1);
-
-    Ban* ban2 = new Ban();
-    
-    ban2->idBan = 2;
-    ban2->merkBan = "Michelin";
-
-    stackBan->push(*ban2);
-
-    Ban* ban3 = new Ban();
-
-    ban3->idBan = 3;
-    ban3->merkBan = "Pirelli";
-
-    stackBan->push(*ban3);
-
-    Ban* ban4 = new Ban();
-
-    ban4->idBan = 4;
-    ban4->merkBan = "Bridgestone";
-
-    stackBan->push(*ban4);
-
-    stackBan->pop();
-
-    stackBan->print();
-
+    menu();
     return 0;
 }

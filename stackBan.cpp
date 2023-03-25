@@ -1,4 +1,5 @@
 //Stack Ban (id Ban dan Merk Ban)
+// Pertama, mengambil library yang dibutuhkan
 #include <iostream>
 #define BMAXX 10
 using namespace std;
